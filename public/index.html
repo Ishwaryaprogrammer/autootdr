@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Auto OTDR</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+</head>
+<body>
+    
+    <h1 class="page-title">Auto OTDR</h1>
+
+    <div class="container">
+        <div class="graph-area">
+            <div class="auto-test-header" id="autoTestHeader">Auto Test 1550nm 500m 3ns</div>
+            
+            <div class="graph-section">
+                <canvas id="graphCanvas"></canvas>
+            </div>
+            <div class="graph-header">
+                <div class="arrow-group">
+                    <button class="arrow-btn" id="prev-wavelength" onclick="changeWavelength(-1)">&#9664;</button>
+                    <span class="test-param" id="wavelength">1550nm</span>
+                    <button class="arrow-btn" id="next-wavelength" onclick="changeWavelength(1)">&#9654;</button>
+                    <button class="arrow-btn" id="prev-distance" onclick="changeDistance(-1)">&#9664;</button>
+                    <span class="test-param" id="distance">500m</span>
+                    <button class="arrow-btn" id="next-distance" onclick="changeDistance(1)">&#9654;</button>
+                </div>
+                <div id="progress-container" class="hidden">
+                    <img id="danger-icon" src="danger.png" alt="Danger" class="danger-icon">
+    
+                    <p id="progress-text">Initializing... 5s</p>
+                    <div class="progress-bar">
+                        <div id="progress-fill"></div>
+                    </div>
+                </div>
+
+                
+                <div class="button-group">
+                    <button class="header-btn">Auto Test</button>
+                    
+                </div>
+                
+
+            </div>
+        </div>
+
+        <div class="right-sidebar">
+            <button onclick="test()" class="sidebar-button">Test</button>
+            <button onclick="testSettings()" class="sidebar-button">Settings</button>
+            <button class="sidebar-button">Event Map</button>
+            <button class="sidebar-button">Files</button>
+            <button class="sidebar-button">Save</button>
+            <button onclick="exitSystem()" class="sidebar-button">Exit</button>
+        </div>
+    </div>
+
+    <!-- Bottom Buttons Section -->
+    <div class="bottom-buttons">
+        <button class="bottom-btn"><i class="fas fa-chart-line"></i> Curve</button>
+        <button class="bottom-btn"><i class="fas fa-list"></i> List</button>
+        <button class="bottom-btn"><i class="fas fa-map"></i> Event Map</button>
+        <button class="bottom-btn"><i class="fas fa-save"></i> Fast Save</button>
+        <button class="bottom-btn settings-btn"><i class="fas fa-cog"></i> Settings</button>
+    </div>
+
+    <script src="script.js"></script>
+    <script>
+    function test() {
+        window.location.href = "index.html";  // Replace with your actual page
+      }
+    
+      function testSettings() {
+        window.location.href = "setindex.html";
+      }
+    
+      function passCriterion() {
+        window.location.href = "passindex.html";
+      }
+    
+      function analysisThreshold() {
+        window.location.href = "thresh.html";
+      }
+    
+      function defaultSettings() {
+        window.location.href = "default.html";
+      }
+    
+      function exitSystem() {
+        window.open('', '_self'); // Needed in some browsers
+        window.close();
+      }</script>
+</body>
+</html>

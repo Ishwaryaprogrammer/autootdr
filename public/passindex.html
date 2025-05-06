@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>OTDR Pass Criterion</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #002147;
+      color: white;
+      margin: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      padding: 10px;
+      box-sizing: border-box;
+    }
+
+    .container {
+      width: 100%;
+      height: 100%;
+      background-color: #003366;
+      border-radius: 8px;
+      padding: 20px;
+      box-sizing: border-box;
+      overflow: hidden;
+      max-width: none;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+    }
+
+    header {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+    header h1 {
+  font-size: 28px;
+  margin-bottom: 5px;
+}
+
+
+    .date-time {
+      font-size: 20px;
+    }
+
+    .settings-group {
+      margin-bottom: 15px;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 25px;
+      font-size: 20px;
+      gap: 50px;
+
+    }
+
+    .checkbox-group label {
+      margin-bottom: 10px;
+      display: block;
+      background-color: #f7f7f7;
+      color: #333;
+      border: 1px solid #ccc;
+      padding: 10px 15px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: normal;
+    }
+
+    .checkbox-group input {
+      margin-right: 10px;
+    }
+
+    .checkbox-group label:hover {
+      background-color: #e6f7ff;
+    }
+
+    footer {
+      width: 180px;
+      background: #333;
+      display: flex;
+      flex-direction: column;
+      position: fixed;
+      top: 0;
+      right: 0;
+      height: 100vh;
+      padding: 10px;
+      z-index: 100;
+    }
+
+    footer button {
+      flex: 1;
+      padding: 20px;
+      background: #444;
+      color: white;
+      border: none;
+      text-align: center;
+      cursor: pointer;
+      font-size: 20px;
+      border-bottom: 1px solid #555;
+    }
+
+    footer button:hover {
+      background: #555;
+    }
+
+    main {
+      flex: 1;
+      margin-right: 200px;
+      overflow-y: auto;
+    }
+
+    .output {
+      margin-top: 15px;
+      font-size: 20px;
+      color: #fff;
+      font-weight: bold;
+    }
+
+    @media (max-width: 768px) {
+      .container {
+        padding: 15px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>OTDR Pass Criterion</h1>
+      <div class="date-time" id="current-datetime">Loading...</div>
+    </header>
+
+    <main>
+      <div class="settings-group">
+        <label>Select one or more Pass Criteria</label>
+        <div class="checkbox-group">
+          <label><input type="checkbox" value="Connection Loss 0.20dB"> Connection Loss 0.20dB</label>
+          <label><input type="checkbox" value="Splicing Loss 0.20dB"> Splicing Loss 0.20dB</label>
+          <label><input type="checkbox" value="Bend Loss 3.00dB"> Bend Loss 3.00dB</label>
+          <label><input type="checkbox" value="Link Loss 32.00dB"> Link Loss 32.00dB</label>
+          <label><input type="checkbox" value="Average Loss (1550nm - 0.25, 1310nm - 0.40dB)"> Average Loss (1550nm - 0.25, 1310nm - 0.40dB)</label>
+        
+        </div>
+      </div>
+
+      <button onclick="savePassCriteria()" style="padding: 10px 20px; font-size: 20px; background: #007bff; color: white; border: none; border-radius: 5px; cursor: pointer;">
+        Save Selection
+      </button>
+
+      <div id="selectedCriteria" class="output"></div>
+    </main>
+
+    <footer>
+      <button onclick="test()">Test</button>
+      <button onclick="testSettings()">Test Settings</button>
+      <button onclick="passCriterion()">Pass Criterion</button>
+      <button onclick="analysisThreshold()">Analysis Threshold</button>
+      <button onclick="defaultSettings()">Default</button>
+      <button onclick="exitSystem()">Exit</button>
+    </footer>
+  </div>
+
+  <script>
+    function updateDateTime() {
+      const currentDate = new Date();
+      const formattedDate = currentDate.toLocaleDateString();
+      const formattedTime = currentDate.toLocaleTimeString();
+      document.getElementById('current-datetime').textContent = `${formattedDate} ${formattedTime}`;
+    }
+
+    setInterval(updateDateTime, 1000);
+    updateDateTime();
+
+    function savePassCriteria() {
+      const selected = [];
+      document.querySelectorAll('.checkbox-group input:checked').forEach((checkbox) => {
+        selected.push(checkbox.value);
+      });
+
+      const output = document.getElementById('selectedCriteria');
+      if (selected.length > 0) {
+        output.textContent = 'Selected: ' + selected.join(', ');
+      } else {
+        output.textContent = 'No criteria selected.';
+      }
+    }
+
+    function test() {
+    window.location.href = "index.html";  // Replace with your actual page
+  }
+
+  function testSettings() {
+    window.location.href = "setindex.html";
+  }
+
+  function passCriterion() {
+    window.location.href = "passindex.html";
+  }
+
+  function analysisThreshold() {
+    window.location.href = "thresh.html";
+  }
+
+  function defaultSettings() {
+    window.location.href = "default.html";
+  }
+
+  function exitSystem() {
+    window.open('', '_self'); // Needed in some browsers
+    window.close();
+  }
+  </script>
+</body>
+</html>

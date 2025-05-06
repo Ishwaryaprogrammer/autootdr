@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test Settings</title>
+    <style>
+      body {
+    font-family: Arial, sans-serif;
+    background-color: #002147;
+    color: white;
+    margin: 0;
+    transition: background-color 0.3s, filter 0.3s;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    padding: 10px;
+    box-sizing: border-box;
+}
+.container {
+    width: 100%;
+    height: 100%;
+    background-color: #003366;
+    border-radius: 8px;
+    padding: 20px;
+    box-sizing: border-box;
+    overflow: hidden;
+    max-width: none;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start; /* Adjust to keep the footer separate */
+}
+title{
+    text-align: center;
+}
+header {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.date-time {
+    font-size: 20px;
+}
+
+.settings-group {
+    margin-bottom: 15px;
+}
+
+label {
+    display: block;
+    margin-bottom: 5px;
+    font-size: 20px;
+}
+
+input[type="date"], input[type="time"], select {
+    width: 100%;
+    padding: 10px;
+    font-size: 20px;
+    border: none;
+    border-radius: 5px;
+    box-sizing: border-box; /* Ensure consistent box sizing */
+}
+
+input[type="date"], input[type="time"] {
+    width: 48%; /* Adjust width to create space */
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    box-sizing: border-box;
+    margin-right: 4%; /* Add space between the two input fields */
+}
+
+input[type="time"] {
+    margin-right: 0; /* Remove margin for the second input */
+}
+
+footer {
+    width: 180px;
+    background: #333;
+    display: flex;
+    flex-direction: column;
+    position: fixed;
+    top: 0;
+    right: 0;
+    height: 100vh;
+    padding: 10px;
+    z-index: 100; /* Ensure the footer stays on top */
+}
+
+footer button {
+    flex: 1;
+    padding: 20px;
+    background: #444;
+    color: white;
+    border: none;
+    text-align: center;
+    cursor: pointer;
+    font-size: 20px;
+    border-bottom: 1px solid #555;
+}
+
+footer button:hover {
+    background: #555;
+}
+
+main {
+    flex: 1;
+    margin-right: 200px; /* Add space for the fixed footer */
+    overflow-y: auto; /* Make the main content scrollable */
+}
+.refractive-index span {
+    display: inline-block;
+    background-color: #f7f7f7; /* Light background color */
+    padding: 10px 15px; /* Increased padding for more space inside */
+    border-radius: 8px; /* Rounded corners for a softer look */
+    margin-top: 10px;
+    margin-bottom: 10px;
+    font-size: 18px;
+    color: #333333; /* Darker text for better readability */
+    font-weight: normal; /* Normal text weight */
+    border: 1px solid #ccc; /* Light border to resemble a comment box */
+    width: 100%; /* Make it stretch the width of its container */
+    box-sizing: border-box; /* Ensure padding and border are included in the width */
+    transition: all 0.3s ease; /* Smooth transition on focus */
+}
+
+.refractive-index span:focus {
+    outline: none; /* Remove default focus outline */
+    border-color: #007BFF; /* Blue border color when focused */
+    background-color: #e6f7ff; /* Light blue background on focus */
+}
+
+
+/* Responsiveness for mobile devices */
+@media (max-width: 768px) {
+    .container {
+        padding: 15px;
+    }
+}
+
+
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1 id="title">Test Settings</h1>
+            <div class="date-time" id="current-datetime">Loading...</div>
+        </header>
+        <main>
+            <div class="settings-group">
+                <label for="wave" id="wave-label">Wave</label>
+                <select id="wave">
+                    <option value="1550nm" selected>1550nm</option>
+                    <option value="1310nm">1310nm</option>
+                </select>
+            </div>
+            <div class="settings-group">
+                <label for="range" id="range-label">Range</label>
+                <select id="range">
+                    <option value="500m" selected>500m</option>
+                    <option value="1km">1km</option>
+                    <option value="2km">2km</option>
+                    <option value="4km">4km</option>
+                    <option value="8km">8km</option>
+                    <option value="16km">16km</option>
+                    <option value="32km">32km</option>
+                </select>
+            </div>
+            <div class="settings-group">
+                <label for="pulse-width" id="pulse-width-label">Pulse Width</label>
+                <select id="pulse-width">
+                    <option value="30ns" selected>30ns</option>
+                    <option value="10ns">10ns</option>
+                    <option value="20ns">20ns</option>
+                    <option value="50ns">50ns</option>
+                    <option value="80ns">80ns</option>
+                </select>
+            </div>
+            <div class="settings-group">
+                <label for="avg-time" id="avg-time-label">Avg. Time</label>
+                <select id="avg-time">
+                    <option value="15s" selected>15s</option>
+                    <option value="30s">30s</option>
+                    <option value="60s">60s</option>
+                    <option value="120s">120s</option>
+                </select>
+            </div>
+            <div class="settings-group">
+                <label for="refractive-index" id="refractive-index-label">Refractive Index</label>
+                <div class="refractive-index">
+                    <span>1550nm: 1.46832</span><br>
+                    <span>1310nm: 1.46770</span>
+                </div>
+            </div>
+            <div class="settings-group">
+                <label for="unit" id="unit-label">Unit</label>
+                <select id="unit">
+                    <option value="km" selected>km</option>
+                    <option value="kft">kft</option>
+                    <option value="mi">mi</option>
+                </select>
+            </div>
+        </main>
+        <footer>
+            <button onclick="test()" id="test-btn">Test</button>
+            <button onclick="testSettings()" id="test-settings-btn">Test Settings</button>
+            <button onclick="passCriterion()" id="pass-Criterion-btn">Pass Criterion</button>
+            <button onclick="analysisThreshold()" id="analysis-threshold-btn">Analysis Threshold</button>
+            <button onclick="defaultSettings()" id="default-btn">Default</button>
+            <button onclick="exitSystem()" id="exit-btn">Exit</button>
+        </footer>
+        
+    </div>
+
+    <script>
+        function updateDateTime() {
+            const currentDate = new Date();
+            const formattedDate = currentDate.toLocaleDateString();
+            const formattedTime = currentDate.toLocaleTimeString();
+            document.getElementById('current-datetime').textContent = `${formattedDate} ${formattedTime}`;
+        }
+
+        setInterval(updateDateTime, 1000);
+        updateDateTime();
+
+      // New functions for each button
+      function test() {
+    window.location.href = "index.html";  // Replace with your actual page
+  }
+
+  function testSettings() {
+    window.location.href = "setindex.html";
+  }
+
+  function passCriterion() {
+    window.location.href = "passindex.html";
+  }
+
+  function analysisThreshold() {
+    window.location.href = "thresh.html";
+  }
+
+  function defaultSettings() {
+    window.location.href = "default.html";
+  }
+
+  function exitSystem() {
+    window.open('', '_self'); // Needed in some browsers
+    window.close();
+  }
+    </script>
+</body>
+</html>
+

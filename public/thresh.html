@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Analysis Threshold</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #002147;
+      color: white;
+      margin: 0;
+      transition: background-color 0.3s, filter 0.3s;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      padding: 10px;
+      box-sizing: border-box;
+    }
+    .container {
+      width: 100%;
+      height: 100%;
+      background-color: #003366;
+      border-radius: 8px;
+      padding: 20px;
+      box-sizing: border-box;
+      overflow: hidden;
+      max-width: none;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+    }
+
+    header {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    .settings-group {
+      margin-bottom: 15px;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 5px;
+      font-size: 20px;
+    }
+
+    select, input[type="number"] {
+      width: 100%;
+      padding: 10px;
+      font-size: 20px;
+      border: none;
+      border-radius: 5px;
+      box-sizing: border-box;
+    }
+
+    .manual-input {
+      display: none;
+      margin-top: 10px;
+    }
+
+    input[disabled] {
+      background-color: #ccc;
+      color: #555;
+    }
+
+    footer {
+      width: 180px;
+      background: #333;
+      display: flex;
+      flex-direction: column;
+      position: fixed;
+      top: 0;
+      right: 0;
+      height: 100vh;
+      padding: 10px;
+      z-index: 100;
+    }
+
+    footer button {
+      flex: 1;
+      padding: 20px;
+      background: #444;
+      color: white;
+      border: none;
+      text-align: center;
+      cursor: pointer;
+      font-size: 20px;
+      border-bottom: 1px solid #555;
+    }
+    .date-time {
+    font-size: 20px;
+}
+    footer button:hover {
+      background: #555;
+    }
+
+    main {
+      flex: 1;
+      margin-right: 200px;
+      overflow-y: auto;
+    }
+
+    @media (max-width: 768px) {
+      .container {
+        padding: 15px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>Analysis Threshold</h1>
+      <div class="date-time" id="current-datetime">Loading...</div>
+    </header>
+    <main>
+      <div class="settings-group">
+        <label for="loss-threshold">Loss Threshold</label>
+        <select id="loss-threshold" onchange="toggleInput('loss-threshold')">
+          <option value="auto">Auto</option>
+          <option value="manual">Manual</option>
+        </select>
+        <input class="manual-input" type="number" id="loss-threshold-input" placeholder="Enter value (e.g., 0.20 dB)" step="0.01">
+      </div>
+
+      <div class="settings-group">
+        <label for="reflectance-threshold">Reflectance Threshold</label>
+        <select id="reflectance-threshold" onchange="toggleInput('reflectance-threshold')">
+          <option value="auto">Auto</option>
+          <option value="manual">Manual</option>
+        </select>
+        <input class="manual-input" type="number" id="reflectance-threshold-input" placeholder="Enter value (e.g., -45 dB)" step="0.1">
+      </div>
+
+      <div class="settings-group">
+        <label for="end-loss-threshold">End Loss Threshold</label>
+        <select id="end-loss-threshold" onchange="toggleInput('end-loss-threshold')">
+          <option value="auto">Auto</option>
+          <option value="manual">Manual</option>
+        </select>
+        <input class="manual-input" type="number" id="end-loss-threshold-input" placeholder="Enter value (e.g., 1.0 dB)" step="0.1">
+      </div>
+
+      <div class="settings-group">
+        <label for="backscatter-coefficient">Backscatter Coefficient</label>
+        <input type="text" id="backscatter-coefficient" value="Disabled" disabled>
+      </div>
+    </main>
+
+    <footer>
+      <button onclick="test()">Test</button>
+      <button onclick="testSettings()">Test Settings</button>
+      <button onclick="passCriterion()">Pass Criterion</button>
+      <button onclick="analysisThreshold()">Analysis Threshold</button>
+      <button onclick="defaultSettings()">Default</button>
+      <button onclick="exitSystem()">Exit</button>
+    </footer>
+  </div>
+
+  <script>
+    function updateDateTime() {
+      const currentDate = new Date();
+      const formattedDate = currentDate.toLocaleDateString();
+      const formattedTime = currentDate.toLocaleTimeString();
+      document.getElementById('current-datetime').textContent = `${formattedDate} ${formattedTime}`;
+    }
+    setInterval(updateDateTime, 1000);
+    updateDateTime();
+
+    function toggleInput(id) {
+      const dropdown = document.getElementById(id);
+      const input = document.getElementById(id + "-input");
+      if (dropdown.value === "manual") {
+        input.style.display = "block";
+      } else {
+        input.style.display = "none";
+        input.value = "";
+      }
+    }
+
+    function test() {
+    window.location.href = "index.html";  // Replace with your actual page
+  }
+
+  function testSettings() {
+    window.location.href = "setindex.html";
+  }
+
+  function passCriterion() {
+    window.location.href = "passindex.html";
+  }
+
+  function analysisThreshold() {
+    window.location.href = "thresh.html";
+  }
+
+  function defaultSettings() {
+    window.location.href = "default.html";
+  }
+
+  function exitSystem() {
+    window.open('', '_self'); // Needed in some browsers
+    window.close();
+  }
+  </script>
+</body>
+</html>
